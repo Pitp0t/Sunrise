@@ -48,23 +48,7 @@ export const useLayout = () => {
     isError: isErrorProjection,
   } = useSunriseProjection(projectionParams);
 
-  // Get user's current location on mount (optional)
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            name: "Your Location",
-          });
-        },
-        () => {
-          console.log("Geolocation not available, using default location");
-        },
-      );
-    }
-  }, []);
+  // Note: Geolocation is now controlled by the LocationSelector component
 
   const handleLocationChange = (newLocation: LocationData) => {
     setLocation(newLocation);

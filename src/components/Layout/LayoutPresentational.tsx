@@ -32,13 +32,13 @@ export const LayoutPresentational = () => {
         </div>
 
         {/* Controls */}
-        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8 space-y-6 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
+        <div className="max-w-7xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center">
+            <div className="flex-1 w-full">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">📍 Location</h3>
               <LocationSelector location={location} onLocationChange={setLocation} />
             </div>
-            <div>
+            <div className="w-full lg:w-96">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">📅 Date</h3>
               <DatePicker date={date} onDateChange={setDate} onResetToToday={resetToToday} />
             </div>
