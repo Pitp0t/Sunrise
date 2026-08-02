@@ -64,7 +64,7 @@ export const MetadataDisplay = ({ data }: MetadataDisplayProps) => {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-orange-400 to-yellow-500 bg-clip-text text-transparent">
+      <h2 className="text-3xl font-bold text-center text-orange-500">
         Detailed Information
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

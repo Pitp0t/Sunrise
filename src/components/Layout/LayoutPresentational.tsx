@@ -25,7 +25,7 @@ export const LayoutPresentational = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-12">
         <div className="text-center space-y-6 mb-12">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-orange-400 via-yellow-500 to-orange-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold text-orange-500">
             Sunrise & Sunset
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">Track sunrise, sunset, and golden hour times for any location on Earth</p>

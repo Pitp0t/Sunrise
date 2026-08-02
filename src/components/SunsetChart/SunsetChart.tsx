@@ -150,32 +150,32 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
       <CardHeader className="space-y-4">
         <CardTitle className="text-2xl flex items-center gap-3 text-white">
-          <div className="p-2 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg">
-            <Sunset className="w-6 h-6 text-white" />
+          <div className="p-2 bg-orange-500/20 rounded-lg">
+            <Sunset className="w-6 h-6 text-orange-500" />
           </div>
           Proyección del Sunset
         </CardTitle>
         <div className="flex flex-wrap gap-4">
-          <div className="flex items-center gap-2 px-4 py-2 bg-orange-900/40 rounded-lg border border-orange-800/50">
-            <Sunset className="w-5 h-5 text-orange-400" />
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-lg border border-gray-700">
+            <Sunset className="w-5 h-5 text-orange-500" />
             <div>
               <p className="text-xs text-gray-400">Sunset actual</p>
-              <p className="text-lg font-bold text-orange-400">{currentData.sunset}</p>
+              <p className="text-lg font-bold text-orange-500">{currentData.sunset}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-blue-900/40 rounded-lg border border-blue-800/50">
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-lg border border-gray-700">
             <div>
               <p className="text-xs text-gray-400">Cambio en 6 meses</p>
-              <p className="text-sm font-semibold text-blue-400">
+              <p className="text-sm font-semibold text-orange-500">
                 {sunsetDiff > 0 ? "+" : ""}{Math.round(sunsetDiff)} minutos
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-purple-900/40 rounded-lg border border-purple-800/50">
-            <Sun className="w-5 h-5 text-purple-400" />
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-lg border border-gray-700">
+            <Sun className="w-5 h-5 text-orange-500" />
             <div>
               <p className="text-xs text-gray-400">Duración del día</p>
-              <p className="text-lg font-bold text-purple-400">{currentData.day_length}</p>
+              <p className="text-lg font-bold text-orange-500">{currentData.day_length}</p>
             </div>
           </div>
         </div>

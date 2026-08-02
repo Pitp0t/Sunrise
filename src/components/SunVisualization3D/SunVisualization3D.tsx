@@ -166,8 +166,8 @@ export const SunVisualization3D = ({ data }: SunVisualization3DProps) => {
     <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
       <CardHeader>
         <CardTitle className="text-2xl flex items-center gap-3 text-white">
-          <div className="p-2 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg">
-            <Sun className="w-6 h-6 text-white" />
+          <div className="p-2 bg-orange-500/20 rounded-lg">
+            <Sun className="w-6 h-6 text-orange-500" />
           </div>
           Visualización 3D del Sol
         </CardTitle>

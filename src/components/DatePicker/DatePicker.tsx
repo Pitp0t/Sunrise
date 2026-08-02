@@ -46,7 +46,7 @@ export const DatePicker = ({
       <Button
         variant="outline"
         onClick={onResetToToday}
-        className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white border-0 font-semibold"
+        className="bg-orange-600 hover:bg-orange-700 text-white border-0 font-semibold"
       >
         Hoy
       </Button>
