@@ -1,15 +1,11 @@
-import { SunriseCard } from './SunriseCard';
-import { MetadataDisplay } from './MetadataDisplay';
-import { LocationSelector } from './LocationSelector';
-import { DatePicker } from './DatePicker';
+import { useLayout } from '../../hooks/useLayout';
+import { SunriseCard } from '../SunriseCard';
+import { MetadataDisplay } from '../MetadataDisplay';
+import { LocationSelector } from '../LocationSelector';
+import { DatePicker } from '../DatePicker';
 import { Loader2, AlertCircle } from 'lucide-react';
-import type { UseLayoutReturn } from '../../hooks/useLayout';
 
-interface SunriseLayoutProps {
-  layoutData: UseLayoutReturn;
-}
-
-export const SunriseLayout = ({ layoutData }: SunriseLayoutProps) => {
+export const SunriseLayout = () => {
   const {
     location,
     date,
@@ -20,7 +16,7 @@ export const SunriseLayout = ({ layoutData }: SunriseLayoutProps) => {
     setLocation,
     setDate,
     resetToToday,
-  } = layoutData;
+  } = useLayout();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900">
