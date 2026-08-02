@@ -3,6 +3,12 @@ export interface SunriseApiResponse {
   status: string;
 }
 
+export interface SunriseApiRangeResponse {
+  results: SunriseData[];
+  status: string;
+  tzid: string;
+}
+
 export interface SunriseData {
   date: string;
   sunrise: string;
@@ -38,4 +44,11 @@ export interface SunriseApiParams {
   lat: number;
   lng: number;
   date: string; // Format: YYYY-MM-DD
+}
+
+export interface SunriseApiRangeParams {
+  lat: number;
+  lng: number;
+  date_start: string; // Format: YYYY-MM-DD
+  date_end: string; // Format: YYYY-MM-DD
 }

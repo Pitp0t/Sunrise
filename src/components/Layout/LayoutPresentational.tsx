@@ -4,9 +4,22 @@ import { DatePicker } from "../DatePicker";
 import { LocationSelector } from "../LocationSelector";
 import { MetadataDisplay } from "../MetadataDisplay";
 import { SunriseCard } from "../SunriseCard";
+import { SunsetChart } from "../SunsetChart";
 
 export const LayoutPresentational = () => {
-  const { location, date, sunriseData, isLoading, isError, error, setLocation, setDate, resetToToday } = useLayout();
+  const { 
+    location, 
+    date, 
+    sunriseData, 
+    isLoading, 
+    isError, 
+    error, 
+    projectionData,
+    isLoadingProjection,
+    setLocation, 
+    setDate, 
+    resetToToday 
+  } = useLayout();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900">
       {/* Hero Section */}
@@ -54,7 +67,20 @@ export const LayoutPresentational = () => {
         {/* Data Display */}
         {sunriseData && !isLoading && (
           <div className="space-y-12">
+            {/* Main Cards */}
             <SunriseCard data={sunriseData} />
+            
+            {/* Sunset Projection Chart */}
+            {isLoadingProjection ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
+                <p className="text-muted-foreground">Cargando proyección del sunset...</p>
+              </div>
+            ) : projectionData && projectionData.length > 0 ? (
+              <SunsetChart data={projectionData} />
+            ) : null}
+            
+            {/* Detailed Metadata */}
             <MetadataDisplay data={sunriseData} />
           </div>
         )}

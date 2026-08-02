@@ -1,7 +1,8 @@
-import { format } from "date-fns";
+import { format, addMonths } from "date-fns";
 import { useEffect, useState } from "react";
 import type { LocationData } from "../types/sunrise.types";
 import { useSunriseData } from "./useSunriseData";
+import { useSunriseProjection } from "./useSunriseProjection";
 
 // Default location: Buenos Aires, Argentina
 const DEFAULT_LOCATION: LocationData = {
@@ -17,6 +18,16 @@ export const useLayout = () => {
   // Format date as YYYY-MM-DD for API
   const formattedDate = format(date, "yyyy-MM-dd");
 
+  // Calculate date range for projection (6 months from today)
+  const today = new Date();
+  const endDate = addMonths(today, 6);
+  const projectionParams = {
+    lat: location.lat,
+    lng: location.lng,
+    date_start: format(today, "yyyy-MM-dd"),
+    date_end: format(endDate, "yyyy-MM-dd"),
+  };
+
   // Fetch sunrise data using React Query
   const {
     data: sunriseData,
@@ -29,6 +40,13 @@ export const useLayout = () => {
     lng: location.lng,
     date: formattedDate,
   });
+
+  // Fetch projection data
+  const {
+    data: projectionData,
+    isLoading: isLoadingProjection,
+    isError: isErrorProjection,
+  } = useSunriseProjection(projectionParams);
 
   // Get user's current location on mount (optional)
   useEffect(() => {
@@ -71,6 +89,11 @@ export const useLayout = () => {
     isLoading,
     isError,
     error,
+
+    // Projection data
+    projectionData,
+    isLoadingProjection,
+    isErrorProjection,
 
     // Actions
     setLocation: handleLocationChange,
