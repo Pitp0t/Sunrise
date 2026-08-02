@@ -1,7 +1,7 @@
-import { SunriseContainer } from './components/Sunrise';
+import { LayoutContainer } from './components/Layout';
 
 function App() {
-  return <SunriseContainer />;
+  return <LayoutContainer />;
 }
 
 export default App;
