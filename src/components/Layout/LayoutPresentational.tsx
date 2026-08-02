@@ -7,27 +7,13 @@ import { SunriseCard } from "../SunriseCard";
 import { SunsetChart } from "../SunsetChart";
 
 export const LayoutPresentational = () => {
-  const { 
-    location, 
-    date, 
-    sunriseData, 
-    isLoading, 
-    isError, 
-    error, 
-    projectionData,
-    isLoadingProjection,
-    setLocation, 
-    setDate, 
-    resetToToday 
-  } = useLayout();
+  const { location, date, sunriseData, isLoading, isError, error, projectionData, isLoadingProjection, setLocation, setDate, resetToToday } = useLayout();
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-12">
         <div className="text-center space-y-6 mb-12">
-          <h1 className="text-5xl md:text-7xl font-bold text-orange-500">
-            Sunrise & Sunset
-          </h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-orange-500">Sunrise & Sunset</h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">Track sunrise, sunset, and golden hour times for any location on Earth</p>
         </div>
 
@@ -69,7 +55,7 @@ export const LayoutPresentational = () => {
           <div className="space-y-12">
             {/* Main Cards */}
             <SunriseCard data={sunriseData} />
-            
+
             {/* Sunset Projection Chart */}
             {isLoadingProjection ? (
               <div className="flex flex-col items-center justify-center py-12">
@@ -79,7 +65,7 @@ export const LayoutPresentational = () => {
             ) : projectionData && projectionData.length > 0 ? (
               <SunsetChart data={projectionData} />
             ) : null}
-            
+
             {/* Detailed Metadata */}
             <MetadataDisplay data={sunriseData} />
           </div>
@@ -88,14 +74,7 @@ export const LayoutPresentational = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-800 mt-20 py-8">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-500">
-          <p>
-            Powered by{" "}
-            <a href="https://sunrisesunset.io" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors">
-              Sunrise Sunset API
-            </a>
-          </p>
-        </div>
+        <div className="container mx-auto px-4 text-center text-sm text-gray-500"></div>
       </footer>
     </div>
   );
