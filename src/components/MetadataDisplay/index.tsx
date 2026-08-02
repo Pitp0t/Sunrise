@@ -1,1 +1,1 @@
-export { MetadataDisplay } from './MetadataDisplay';
+export { MetadataDisplay } from "./MetadataDisplay";

@@ -1,7 +1,7 @@
-import { LayoutContainer } from './components/Layout';
+import { LayoutPresentational } from "./components/Layout";
 
 function App() {
-  return <LayoutContainer />;
+  return <LayoutPresentational />;
 }
 
 export default App;
