@@ -51,16 +51,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       height: 400,
       background: 'transparent',
       toolbar: {
-        show: true,
-        tools: {
-          download: true,
-          selection: true,
-          zoom: true,
-          zoomin: true,
-          zoomout: true,
-          pan: true,
-          reset: true,
-        },
+        show: false,
       },
       animations: {
         enabled: true,
