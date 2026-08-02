@@ -1,5 +1,5 @@
-import { format, addMonths } from "date-fns";
-import { useEffect, useState } from "react";
+import { addMonths, format } from "date-fns";
+import { useState } from "react";
 import type { LocationData } from "../types/sunrise.types";
 import { useSunriseData } from "./useSunriseData";
 import { useSunriseProjection } from "./useSunriseProjection";
@@ -42,11 +42,7 @@ export const useLayout = () => {
   });
 
   // Fetch projection data
-  const {
-    data: projectionData,
-    isLoading: isLoadingProjection,
-    isError: isErrorProjection,
-  } = useSunriseProjection(projectionParams);
+  const { data: projectionData, isLoading: isLoadingProjection, isError: isErrorProjection } = useSunriseProjection(projectionParams);
 
   // Note: Geolocation is now controlled by the LocationSelector component
 
