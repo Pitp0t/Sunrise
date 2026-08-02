@@ -79,19 +79,19 @@ export const LocationSelector = ({
   return (
     <div className="space-y-4">
       {/* Current Location Display */}
-      <div className="flex items-center gap-2 text-sm font-medium text-foreground bg-muted px-3 py-2 rounded-lg">
-        <MapPin className="w-4 h-4 text-orange-600" />
+      <div className="flex items-center gap-2 text-sm font-medium text-white bg-gray-800/50 backdrop-blur-sm border border-gray-700 px-3 py-2 rounded-lg">
+        <MapPin className="w-4 h-4 text-orange-500" />
         <span>{location.name || 'Ubicación personalizada'}</span>
-        <span className="text-xs text-muted-foreground ml-auto">
+        <span className="text-xs text-gray-400 ml-auto">
           {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
         </span>
       </div>
       
       {/* Search Input */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none z-10" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none z-10" />
         {isSearching && (
-          <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground animate-spin z-10" />
+          <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-500 animate-spin z-10" />
         )}
         <Input
           type="text"
@@ -100,23 +100,23 @@ export const LocationSelector = ({
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => searchResults.length > 0 && setShowResults(true)}
           onBlur={() => setTimeout(() => setShowResults(false), 200)}
-          className="pl-10 pr-10"
+          className="pl-10 pr-10 bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
         />
         
         {/* Search Results Dropdown */}
         {showResults && searchResults.length > 0 && (
-          <div className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 border border-border rounded-lg shadow-lg max-h-64 overflow-y-auto">
+          <div className="absolute z-50 w-full mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl max-h-64 overflow-y-auto">
             {searchResults.map((result) => (
               <button
                 key={result.id}
                 onClick={() => handleSelectLocation(result)}
-                className="w-full px-4 py-3 text-left hover:bg-accent hover:text-accent-foreground transition-colors border-b border-border last:border-b-0 flex items-start gap-3"
+                className="w-full px-4 py-3 text-left hover:bg-gray-700 transition-colors border-b border-gray-700 last:border-b-0 flex items-start gap-3"
               >
-                <MapPin className="w-4 h-4 mt-1 text-orange-600 flex-shrink-0" />
+                <MapPin className="w-4 h-4 mt-1 text-orange-500 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm truncate">{result.name}</p>
-                  <p className="text-xs text-muted-foreground truncate">{result.fullName}</p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="font-medium text-sm truncate text-white">{result.name}</p>
+                  <p className="text-xs text-gray-400 truncate">{result.fullName}</p>
+                  <p className="text-xs text-gray-500 mt-1">
                     {result.lat.toFixed(4)}, {result.lng.toFixed(4)}
                   </p>
                 </div>
@@ -126,8 +126,8 @@ export const LocationSelector = ({
         )}
         
         {showResults && searchResults.length === 0 && searchQuery.length >= 3 && !isSearching && (
-          <div className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 border border-border rounded-lg shadow-lg p-4">
-            <p className="text-sm text-muted-foreground text-center">
+          <div className="absolute z-50 w-full mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl p-4">
+            <p className="text-sm text-gray-400 text-center">
               No se encontraron resultados
             </p>
           </div>
@@ -138,7 +138,7 @@ export const LocationSelector = ({
       <Button
         variant="outline"
         onClick={handleUseCurrentLocation}
-        className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 border-0 font-semibold"
+        className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 font-semibold"
       >
         <Navigation className="w-4 h-4" />
         Usar Mi Ubicación Actual

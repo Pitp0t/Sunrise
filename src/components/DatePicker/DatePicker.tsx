@@ -25,15 +25,15 @@ export const DatePicker = ({
           <Button
             variant={"outline"}
             className={cn(
-              "flex-1 justify-start text-left font-normal",
-              !date && "text-muted-foreground"
+              "flex-1 justify-start text-left font-normal bg-gray-800/50 border-gray-700 text-white hover:bg-gray-700",
+              !date && "text-gray-400"
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-4 w-4 text-orange-500" />
             {date ? format(date, "PPP", { locale: es }) : <span>Selecciona una fecha</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
+        <PopoverContent className="w-auto p-0 bg-gray-800 border-gray-700">
           <Calendar
             mode="single"
             selected={date}
@@ -46,7 +46,7 @@ export const DatePicker = ({
       <Button
         variant="outline"
         onClick={onResetToToday}
-        className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-0 font-semibold"
+        className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white border-0 font-semibold"
       >
         Hoy
       </Button>

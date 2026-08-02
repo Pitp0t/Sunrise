@@ -64,15 +64,15 @@ export const MetadataDisplay = ({ data }: MetadataDisplayProps) => {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+      <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-orange-400 to-yellow-500 bg-clip-text text-transparent">
         Detailed Information
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sections.map((section) => (
-          <Card key={section.title} className="hover:shadow-lg transition-shadow">
+          <Card key={section.title} className="hover:shadow-2xl transition-all bg-gray-900/50 backdrop-blur-sm border-gray-800">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <section.icon className="w-5 h-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <section.icon className="w-5 h-5 text-orange-500" />
                 {section.title}
               </CardTitle>
             </CardHeader>
@@ -81,12 +81,12 @@ export const MetadataDisplay = ({ data }: MetadataDisplayProps) => {
                 {section.items.map((item) => (
                   <div
                     key={item.label}
-                    className="flex justify-between items-center py-2 border-b border-border last:border-0"
+                    className="flex justify-between items-center py-2 border-b border-gray-800 last:border-0"
                   >
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-gray-400">
                       {item.label}
                     </span>
-                    <span className="text-sm font-semibold">{item.value}</span>
+                    <span className="text-sm font-semibold text-white">{item.value}</span>
                   </div>
                 ))}
               </div>

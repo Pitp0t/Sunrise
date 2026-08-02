@@ -49,6 +49,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     chart: {
       type: "line",
       height: 400,
+      background: 'transparent',
       toolbar: {
         show: true,
         tools: {
@@ -71,7 +72,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       curve: "smooth",
       width: 3,
     },
-    colors: ["#f97316"],
+    colors: ["#fb923c"],
     dataLabels: {
       enabled: false,
     },
@@ -80,6 +81,9 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       labels: {
         rotate: -45,
         rotateAlways: false,
+        style: {
+          colors: '#9ca3af',
+        },
         formatter: (value: string) => {
           const date = new Date(value);
           return date.toLocaleDateString("es-ES", { day: "numeric", month: "short" });
@@ -90,7 +94,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       title: {
         text: "Hora del Sunset",
         style: {
-          color: "#f97316",
+          color: "#fb923c",
           fontSize: "12px",
           fontWeight: 600,
         },
@@ -98,7 +102,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       labels: {
         formatter: (value: number) => formatTime(value),
         style: {
-          colors: ["#f97316"],
+          colors: ["#fb923c"],
         },
       },
       min: Math.min(...chartData.sunsetTimes) - 30,
@@ -107,6 +111,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     tooltip: {
       shared: true,
       intersect: false,
+      theme: 'dark',
       y: {
         formatter: (value: number) => formatTime(value),
       },
@@ -115,6 +120,9 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       show: true,
       position: "top",
       horizontalAlign: "center",
+      labels: {
+        colors: '#d1d5db',
+      },
       markers: {
         width: 12,
         height: 12,
@@ -122,7 +130,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       },
     },
     grid: {
-      borderColor: "#e5e7eb",
+      borderColor: "#374151",
       strokeDashArray: 3,
     },
   };
@@ -134,40 +142,40 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     },
   ];
 
-  const currentData = data[data.length - 1];
-  const firstData = data[0];
-  const sunsetDiff = timeToMinutes(currentData.sunset) - timeToMinutes(firstData.sunset);
+  const currentData = data[0];
+  const lastData = data[data.length - 1];
+  const sunsetDiff = timeToMinutes(lastData.sunset) - timeToMinutes(currentData.sunset);
 
   return (
-    <Card className="w-full shadow-lg">
+    <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
       <CardHeader className="space-y-4">
-        <CardTitle className="text-2xl flex items-center gap-3">
+        <CardTitle className="text-2xl flex items-center gap-3 text-white">
           <div className="p-2 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg">
             <Sunset className="w-6 h-6 text-white" />
           </div>
           Proyección del Sunset
         </CardTitle>
         <div className="flex flex-wrap gap-4">
-          <div className="flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-lg border border-orange-200">
-            <Sunset className="w-5 h-5 text-orange-600" />
+          <div className="flex items-center gap-2 px-4 py-2 bg-orange-900/40 rounded-lg border border-orange-800/50">
+            <Sunset className="w-5 h-5 text-orange-400" />
             <div>
-              <p className="text-xs text-muted-foreground">Sunset actual</p>
-              <p className="text-lg font-bold text-orange-600">{currentData.sunset}</p>
+              <p className="text-xs text-gray-400">Sunset actual</p>
+              <p className="text-lg font-bold text-orange-400">{currentData.sunset}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="flex items-center gap-2 px-4 py-2 bg-blue-900/40 rounded-lg border border-blue-800/50">
             <div>
-              <p className="text-xs text-muted-foreground">Cambio en 6 meses</p>
-              <p className="text-sm font-semibold text-blue-600">
+              <p className="text-xs text-gray-400">Cambio en 6 meses</p>
+              <p className="text-sm font-semibold text-blue-400">
                 {sunsetDiff > 0 ? "+" : ""}{Math.round(sunsetDiff)} minutos
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-lg border border-purple-200">
-            <Sun className="w-5 h-5 text-purple-600" />
+          <div className="flex items-center gap-2 px-4 py-2 bg-purple-900/40 rounded-lg border border-purple-800/50">
+            <Sun className="w-5 h-5 text-purple-400" />
             <div>
-              <p className="text-xs text-muted-foreground">Duración del día</p>
-              <p className="text-lg font-bold text-purple-600">{currentData.day_length}</p>
+              <p className="text-xs text-gray-400">Duración del día</p>
+              <p className="text-lg font-bold text-purple-400">{currentData.day_length}</p>
             </div>
           </div>
         </div>
