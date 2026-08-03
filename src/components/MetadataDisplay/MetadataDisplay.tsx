@@ -1,6 +1,6 @@
 import { CloudSun, Moon, Sunrise as SunriseIcon, Sunset as SunsetIcon, Waves } from "lucide-react";
 import type { SunriseData } from "../../types/sunrise.types";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card1";
 
 interface MetadataDisplayProps {
   data: SunriseData;
