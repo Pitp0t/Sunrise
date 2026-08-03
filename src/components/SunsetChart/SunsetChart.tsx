@@ -11,7 +11,6 @@ interface SunsetChartProps {
 }
 
 const timeToMinutes = (timeStr: string): number => {
-  // Convierte "6:14:43 PM" a minutos desde medianoche
   const match = timeStr.match(/(\d+):(\d+):(\d+)\s*(AM|PM)/i);
   if (!match) return 0;
 
