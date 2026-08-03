@@ -41,7 +41,7 @@ export const LayoutPresentational = () => {
 
         {/* Error State */}
         {isError && (
-          <div className="max-w-2xl mx-auto bg-red-950/20 border border-red-900 rounded-lg p-6 flex items-start gap-4">
+          <div className="mx-auto bg-red-950/20 border border-red-900 rounded-lg p-6 flex items-start gap-4">
             <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-semibold text-red-400 mb-2">Error loading data</h3>
