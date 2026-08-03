@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { MapPin, Navigation, Search, Loader2 } from 'lucide-react';
-import type { LocationData } from '../../types/sunrise.types';
-import { searchLocations } from '../../services/geocodingApi';
+import { Loader2, MapPin, Navigation, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import { searchLocations } from "../../services/geocodingApi";
+import type { LocationData } from "../../types/sunrise.types";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
 
 interface LocationSelectorProps {
   location: LocationData;
@@ -18,11 +18,8 @@ interface SearchResult {
   fullName: string;
 }
 
-export const LocationSelector = ({
-  location,
-  onLocationChange,
-}: LocationSelectorProps) => {
-  const [searchQuery, setSearchQuery] = useState('');
+export const LocationSelector = ({ location, onLocationChange }: LocationSelectorProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -50,7 +47,7 @@ export const LocationSelector = ({
       lng: result.lng,
       name: result.name,
     });
-    setSearchQuery('');
+    setSearchQuery("");
     setShowResults(false);
     setSearchResults([]);
   };
@@ -64,15 +61,15 @@ export const LocationSelector = ({
           onLocationChange({
             lat: newLat,
             lng: newLng,
-            name: 'Tu Ubicación',
+            name: "Tu Ubicación",
           });
         },
         (error) => {
-          alert('No se pudo obtener tu ubicación: ' + error.message);
-        }
+          alert("No se pudo obtener tu ubicación: " + error.message);
+        },
       );
     } else {
-      alert('Geolocalización no soportada por tu navegador');
+      alert("Geolocalización no soportada por tu navegador");
     }
   };
 
@@ -81,18 +78,16 @@ export const LocationSelector = ({
       {/* Current Location Display */}
       <div className="flex items-center gap-2 text-sm font-medium text-white bg-gray-800/50 backdrop-blur-sm border border-gray-700 px-3 py-2 rounded-lg">
         <MapPin className="w-4 h-4 text-orange-500" />
-        <span>{location.name || 'Ubicación personalizada'}</span>
+        <span>{location.name || "Ubicación personalizada"}</span>
         <span className="text-xs text-gray-400 ml-auto">
           {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
         </span>
       </div>
-      
+
       {/* Search Input */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none z-10" />
-        {isSearching && (
-          <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-500 animate-spin z-10" />
-        )}
+        {isSearching && <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-500 animate-spin z-10" />}
         <Input
           type="text"
           placeholder="Buscar ciudad, país o lugar..."
@@ -102,7 +97,7 @@ export const LocationSelector = ({
           onBlur={() => setTimeout(() => setShowResults(false), 200)}
           className="pl-10 pr-10 bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
         />
-        
+
         {/* Search Results Dropdown */}
         {showResults && searchResults.length > 0 && (
           <div className="absolute z-50 w-full mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl max-h-64 overflow-y-auto">
@@ -124,12 +119,10 @@ export const LocationSelector = ({
             ))}
           </div>
         )}
-        
+
         {showResults && searchResults.length === 0 && searchQuery.length >= 3 && !isSearching && (
           <div className="absolute z-50 w-full mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl p-4">
-            <p className="text-sm text-gray-400 text-center">
-              No se encontraron resultados
-            </p>
+            <p className="text-sm text-gray-400 text-center">No se encontraron resultados</p>
           </div>
         )}
       </div>

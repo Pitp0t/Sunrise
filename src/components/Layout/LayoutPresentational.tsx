@@ -1,17 +1,17 @@
 import { AlertCircle, Loader2 } from "lucide-react";
-import { useLayout } from "../../hooks/useLayout";
 import { DatePicker } from "../DatePicker";
 import { LocationSelector } from "../LocationSelector";
 import { MetadataDisplay } from "../MetadataDisplay";
 import { SunriseCard } from "../SunriseCard";
 import { SunsetChart } from "../SunsetChart";
+import { useLayout } from "./LayoutPresentational.container";
 
 export const LayoutPresentational = () => {
   const { location, date, sunriseData, isLoading, isError, error, projectionData, isLoadingProjection, setLocation, setDate, resetToToday } = useLayout();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+    <main className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 max-w-7xl">
         <div className="text-center space-y-6 mb-12">
           <h1 className="text-5xl md:text-7xl font-bold text-orange-500">Sunrise & Sunset</h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">Track sunrise, sunset, and golden hour times for any location on Earth</p>
@@ -19,7 +19,7 @@ export const LayoutPresentational = () => {
 
         {/* Controls */}
         <div className="mx-auto bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 mb-12">
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
             <div className="flex-1 w-full min-w-0">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">📍 Location</h3>
               <LocationSelector location={location} onLocationChange={setLocation} />
@@ -73,9 +73,16 @@ export const LayoutPresentational = () => {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 mt-20 py-8">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-500"></div>
+      <footer className="border-t border-border mt-20 py-8">
+        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+          <p>
+            Created by{" "}
+            <a href="https://github.com/Pitp0t" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">
+              Gonzalo Iurman
+            </a>
+          </p>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 };
