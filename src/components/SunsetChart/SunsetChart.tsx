@@ -1,5 +1,5 @@
 import { Sun, Sunset } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Chart from "react-apexcharts";
 import type { SunriseData } from "../../types/sunrise.types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
@@ -45,10 +45,23 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     return { dates, sunsetTimes };
   }, [data]);
 
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 768px)").matches);
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+
+    const handler = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    media.addEventListener("change", handler);
+
+    return () => media.removeEventListener("change", handler);
+  }, []);
+
   const options: ApexOptions = {
     chart: {
-      type: "line",
-      height: 400,
+      type: isMobile ? "bar" : "line",
+      height: isMobile ? 700 : 400,
       background: "transparent",
       toolbar: {
         show: false,
@@ -62,49 +75,117 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         enabled: false,
       },
     },
+
     selection: {
       enabled: false,
     },
+
+    colors: ["#fb923c"],
+
     stroke: {
       curve: "smooth",
-      width: 3,
+      width: isMobile ? 0 : 3,
     },
-    colors: ["#fb923c"],
+
+    plotOptions: isMobile
+      ? {
+          bar: {
+            horizontal: true,
+            borderRadius: 6,
+            barHeight: "55%",
+            dataLabels: {
+              position: "top",
+            },
+          },
+        }
+      : {},
+
     dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: chartData.dates,
-      labels: {
-        rotate: -45,
-        rotateAlways: false,
-        style: {
-          colors: "#9ca3af",
-        },
-        formatter: (value: string) => {
-          const date = new Date(value);
-          return date.toLocaleDateString("es-ES", { day: "numeric", month: "short" });
-        },
+      enabled: isMobile,
+      formatter: (value: number) => formatTime(value),
+      offsetX: 20,
+      offsetY: 0,
+      textAnchor: "start",
+      style: {
+        fontSize: "11px",
+        fontWeight: 400,
+        colors: ["#d1d5db"],
+      },
+      background: {
+        enabled: false,
       },
     },
-    yaxis: {
-      title: {
-        text: "Hora del Sunset",
-        style: {
-          color: "#fb923c",
-          fontSize: "12px",
-          fontWeight: 600,
+
+    xaxis: isMobile
+      ? {
+          categories: chartData.dates,
+          min: Math.min(...chartData.sunsetTimes) - 60,
+          max: Math.max(...chartData.sunsetTimes) + 120,
+          labels: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+        }
+      : {
+          categories: chartData.dates,
+          labels: {
+            rotate: -45,
+            style: {
+              colors: "#9ca3af",
+            },
+            formatter: (value: string) => {
+              const date = new Date(value);
+
+              return date.toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "short",
+              });
+            },
+          },
         },
-      },
-      labels: {
-        formatter: (value: number) => formatTime(value),
-        style: {
-          colors: ["#fb923c"],
+
+    yaxis: isMobile
+      ? {
+          labels: {
+            formatter: (_value: string, opts: any) => {
+              const date = new Date(chartData.dates[opts.dataPointIndex]);
+
+              return date.toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "short",
+              });
+            },
+            style: {
+              colors: "#9ca3af",
+              fontSize: "11px",
+              fontWeight: 400,
+            },
+          },
+        }
+      : {
+          title: {
+            text: "Hora del Sunset",
+            style: {
+              color: "#fb923c",
+              fontSize: "12px",
+              fontWeight: 600,
+            },
+          },
+          labels: {
+            formatter: (value: number) => formatTime(value),
+            style: {
+              colors: ["#fb923c"],
+            },
+          },
+          min: Math.min(...chartData.sunsetTimes) - 30,
+          max: Math.max(...chartData.sunsetTimes) + 30,
         },
-      },
-      min: Math.min(...chartData.sunsetTimes) - 30,
-      max: Math.max(...chartData.sunsetTimes) + 30,
-    },
+
     tooltip: {
       shared: true,
       intersect: false,
@@ -113,8 +194,9 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         formatter: (value: number) => formatTime(value),
       },
     },
+
     legend: {
-      show: true,
+      show: !isMobile,
       position: "top",
       horizontalAlign: "center",
       labels: {
@@ -126,9 +208,24 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         radius: 6,
       },
     },
+
     grid: {
+      show: !isMobile,
       borderColor: "#374151",
       strokeDashArray: 3,
+      padding: {
+        right: isMobile ? 120 : 0,
+        left: isMobile ? 10 : 0,
+      },
+    },
+
+    states: {
+      hover: {
+        filter: {
+          type: "lighten",
+          value: 0.15,
+        },
+      },
     },
   };
 
@@ -142,7 +239,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
   const currentData = data[0];
 
   return (
-    <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
+    <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800 ">
       <CardHeader className="space-y-4">
         <CardTitle className="text-2xl flex items-center gap-3 text-white">
           <div className="p-2 bg-orange-500/20 rounded-lg">
@@ -169,7 +266,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         </div>
       </CardHeader>
       <CardContent>
-        <Chart options={options} series={series} type="line" height={400} />
+        <Chart options={options} series={series} type={isMobile ? "bar" : "line"} height={isMobile ? 650 : 400} />
       </CardContent>
     </Card>
   );
