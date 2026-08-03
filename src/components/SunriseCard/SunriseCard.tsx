@@ -1,6 +1,6 @@
 import { Clock, Sun, Sunrise, Sunset } from "lucide-react";
 import type { SunriseData } from "../../types/sunrise.types";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card1";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 
 interface SunriseCardProps {
   data: SunriseData;

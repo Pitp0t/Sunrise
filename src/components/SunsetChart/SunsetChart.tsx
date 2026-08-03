@@ -2,7 +2,7 @@ import { Sun, Sunset } from "lucide-react";
 import { useMemo } from "react";
 import Chart from "react-apexcharts";
 import type { SunriseData } from "../../types/sunrise.types";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card1";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 
 type ApexOptions = any;
 

@@ -2,8 +2,8 @@ import { Loader2, MapPin, Navigation, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { searchLocations } from "../../services/geocodingApi";
 import type { LocationData } from "../../types/sunrise.types";
-import { Button } from "../ui/Button1";
-import { Input } from "../ui/Input1";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
 
 interface LocationSelectorProps {
   location: LocationData;
