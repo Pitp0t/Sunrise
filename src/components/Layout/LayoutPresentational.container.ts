@@ -1,8 +1,8 @@
 import { addMonths, format } from "date-fns";
 import { useState } from "react";
-import type { LocationData } from "../types/sunrise.types";
-import { useSunriseData } from "./useSunriseData";
-import { useSunriseProjection } from "./useSunriseProjection";
+import { useSunriseData } from "../../hooks/useSunriseData";
+import { useSunriseProjection } from "../../hooks/useSunriseProjection";
+import type { LocationData } from "../../types/sunrise.types";
 
 // Default location: Buenos Aires, Argentina
 const DEFAULT_LOCATION: LocationData = {

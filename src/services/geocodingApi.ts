@@ -44,8 +44,7 @@ export const searchLocations = async (query: string): Promise<LocationSearchResu
       lng: parseFloat(result.lon),
       fullName: result.display_name,
     }));
-  } catch (error) {
-    console.error("Error searching locations:", error);
+  } catch {
     return [];
   }
 };

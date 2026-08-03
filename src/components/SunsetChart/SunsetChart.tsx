@@ -1,8 +1,8 @@
+import { Sun, Sunset } from "lucide-react";
 import { useMemo } from "react";
 import Chart from "react-apexcharts";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import type { SunriseData } from "../../types/sunrise.types";
-import { Sunset, Sun } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 
 type ApexOptions = any;
 
@@ -14,15 +14,15 @@ const timeToMinutes = (timeStr: string): number => {
   // Convierte "6:14:43 PM" a minutos desde medianoche
   const match = timeStr.match(/(\d+):(\d+):(\d+)\s*(AM|PM)/i);
   if (!match) return 0;
-  
+
   let hours = parseInt(match[1]);
   const minutes = parseInt(match[2]);
   const seconds = parseInt(match[3]);
   const period = match[4].toUpperCase();
-  
+
   if (period === "PM" && hours !== 12) hours += 12;
   if (period === "AM" && hours === 12) hours = 0;
-  
+
   return hours * 60 + minutes + seconds / 60;
 };
 
@@ -38,7 +38,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
   const chartData = useMemo(() => {
     // Filtrar datos cada 15 días
     const filteredData = data.filter((_, index) => index % 15 === 0);
-    
+
     const dates = filteredData.map((d) => d.date);
     const sunsetTimes = filteredData.map((d) => timeToMinutes(d.sunset));
 
@@ -49,7 +49,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     chart: {
       type: "line",
       height: 400,
-      background: 'transparent',
+      background: "transparent",
       toolbar: {
         show: false,
       },
@@ -58,6 +58,12 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         easing: "easeinout",
         speed: 800,
       },
+      zoom: {
+        enabled: false,
+      },
+    },
+    selection: {
+      enabled: false,
     },
     stroke: {
       curve: "smooth",
@@ -73,7 +79,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
         rotate: -45,
         rotateAlways: false,
         style: {
-          colors: '#9ca3af',
+          colors: "#9ca3af",
         },
         formatter: (value: string) => {
           const date = new Date(value);
@@ -102,7 +108,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
     tooltip: {
       shared: true,
       intersect: false,
-      theme: 'dark',
+      theme: "dark",
       y: {
         formatter: (value: number) => formatTime(value),
       },
@@ -112,7 +118,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
       position: "top",
       horizontalAlign: "center",
       labels: {
-        colors: '#d1d5db',
+        colors: "#d1d5db",
       },
       markers: {
         width: 12,
@@ -134,8 +140,6 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
   ];
 
   const currentData = data[0];
-  const lastData = data[data.length - 1];
-  const sunsetDiff = timeToMinutes(lastData.sunset) - timeToMinutes(currentData.sunset);
 
   return (
     <Card className="w-full shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
@@ -154,14 +158,7 @@ export const SunsetChart = ({ data }: SunsetChartProps) => {
               <p className="text-lg font-bold text-orange-500">{currentData.sunset}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-lg border border-gray-700">
-            <div>
-              <p className="text-xs text-gray-400">Cambio en 6 meses</p>
-              <p className="text-sm font-semibold text-orange-500">
-                {sunsetDiff > 0 ? "+" : ""}{Math.round(sunsetDiff)} minutos
-              </p>
-            </div>
-          </div>
+
           <div className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-lg border border-gray-700">
             <Sun className="w-5 h-5 text-orange-500" />
             <div>

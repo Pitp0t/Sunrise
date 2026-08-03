@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.sunrisesunset.io",
@@ -8,31 +9,26 @@ const axiosInstance = axios.create({
   },
 });
 
-// Request interceptor
 axiosInstance.interceptors.request.use(
-  (config) => {
-    // Puedes agregar lógica aquí, como tokens, etc.
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (config) => config,
+  (error) => Promise.reject(error),
 );
 
-// Response interceptor
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // Manejo global de errores
+    let message = "Ha ocurrido un error inesperado.";
+
     if (error.response) {
-      console.error("API Error:", error.response.status, error.response.data);
+      message = error.response.data?.message ?? `Error ${error.response.status}: No se pudo completar la solicitud.`;
     } else if (error.request) {
-      console.error("Network Error:", error.request);
+      message = "No se pudo conectar con el servidor. Revisa tu conexión.";
     } else {
-      console.error("Error:", error.message);
+      message = error.message;
     }
+
+    toast.error(message);
+
     return Promise.reject(error);
   },
 );
